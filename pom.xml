@@ -45,7 +45,6 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>3.7.1</version>
             <type>jar</type>
         </dependency>
     </dependencies>

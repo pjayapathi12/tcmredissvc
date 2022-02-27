@@ -3,18 +3,15 @@ package com.cloudathon.cloudathondemo.event.services.tcm;
 import com.cloudathon.cloudathondemo.TcmEventProducer;
 import com.cloudathon.cloudathondemo.event.interfaces.TcmEventFlowInterface;
 import com.cloudathon.cloudathondemo.models.TcmEvent;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
 
 @Log4j2
 @Service("TcmResourcesDbSavedMiniflowService")
@@ -50,9 +47,9 @@ public class TcmResourcesDbSavedMiniflowService implements TcmEventFlowInterface
             hashOperations.put(TCM_CACHE, tcmEvent.getTcmId(), objectMapper.writeValueAsString(tcmEvent));
         }
 
-        byte[] dump = hashOperations.(tcmEvent.getTcmId());
+        String redisValue = hashOperations.get(TCM_CACHE, tcmEvent.getTcmId());
         //String redisValue = ops.ent.getTcmId());
-        log.info("value returned from redis is {}", new String(dump));
+        log.info("value returned from redis is {}", redisValue);
 
         log.info("event processed successfully");
 
