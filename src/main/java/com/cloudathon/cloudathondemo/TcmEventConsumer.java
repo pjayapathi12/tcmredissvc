@@ -22,7 +22,7 @@ public class TcmEventConsumer {
     @KafkaListener(topics = "#{'${io.confluent.developer.config.topic.name}'}", containerFactory= "kafkaListenerContainerFactory",
             groupId = "mygroupidtcmredissvc")
     public void consume(final ConsumerRecord<String, String> consumerRecord, Acknowledgment acknowledgment)  {
-        log.info("received {} {}", consumerRecord.key(), consumerRecord.value());
+        log.info("received {} {} {}", consumerRecord.offset(), consumerRecord.key(), consumerRecord.value());
         try {
             TcmEvent tcmEvent = objectMapper.readValue(consumerRecord.value(), TcmEvent.class);
             acknowledgment.acknowledge();
