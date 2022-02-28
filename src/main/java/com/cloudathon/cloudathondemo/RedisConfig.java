@@ -10,6 +10,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @EnableKafka
@@ -25,7 +26,7 @@ public class RedisConfig {
 
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
-        List<String> nodes = Arrays.stream(servers.split(",")).toList();
+        List<String> nodes = Arrays.stream(servers.split(",")).collect(Collectors.toList());
         JedisConnectionFactory jedisConFactory
                 = new JedisConnectionFactory(new RedisClusterConfiguration(nodes));
         jedisConFactory.setHostName("localhost");
