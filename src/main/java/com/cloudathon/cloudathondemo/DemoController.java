@@ -31,4 +31,9 @@ public class DemoController {
         return hashOperations.get(TCM_CACHE, tcmId);
     }
 
+    @GetMapping(value = "/test")
+    public String test(@PathVariable String tcmId) {
+        return "Test API returned data successfully in Azure";
+    }
+
 }
