@@ -32,7 +32,7 @@ public class DemoController {
     }
 
     @GetMapping(value = "/test")
-    public String test(@PathVariable String tcmId) {
+    public String test() {
         return "Test API returned data successfully in Azure";
     }
 
